@@ -5,6 +5,7 @@
 %   1. 请确保使用 UTF-8 编码保存
 %   2. 请使用 XeLaTeX编译
 %   3. 最初编写环境为Tex Live2020
+%test
 %=========================================================
 \usepackage{syntonly}
 \usepackage{color,xcolor}
@@ -173,6 +174,31 @@
     \renewcommand{\themythmcounter}{\Alph{section}.\arabic{mythmcounter}}
 }
 %===================== 定理类环境 ==========================
+%例题环境
+\newcounter{myexmcounter}
+\setcounter{myexmcounter}{0}
+\numberwithin{myexmcounter}{section}
+\newcommand{\myexmindent}{0em}
+\renewcommand{\themyexmcounter}{\arabic{section}.\arabic{myexmcounter}}
+\newcommand{\myexmfont}{\normalsize\rmfamily\bfseries}
+\newcommand{\myexmlabel}
+{
+    \hspace{\myexmindent}
+    \fcolorbox{cyan}{cyan}
+        {\myexmfont{}例题\hspace{0.5em}\themyexmcounter}
+}
+\newenvironment{myexm}[1]
+    {
+        \refstepcounter{myexmcounter}
+        \par\vspace{0ex}
+        \noindent
+        \rule[0.3ex]{16cm}{0.8pt}
+        \par\noindent\myexmlabel\hspace{0.3em}\mbox{\myexmfont{}#1}
+        \kaishu\par
+    }
+    {\par\noindent\rule[1.5ex]{16cm}{0.8pt}\par\vspace{-0.5ex}}
+
+
 %定理环境
 \newcounter{mythmcounter}
 \setcounter{mythmcounter}{0}
@@ -196,6 +222,8 @@
         \kaishu\par
     }
     {\par\noindent\rule[1.5ex]{16cm}{0.8pt}\par\vspace{-0.5ex}}
+
+
 
 %定义环境
 \newcounter{mydefcounter}
